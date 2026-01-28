@@ -1,9 +1,9 @@
-let
-  input = builtins.filter (x: x != [ ]) (builtins.split "\n" (builtins.readFile ./input));
-  numbers = builtins.map builtins.fromJSON input;
+with builtins;
 
-  triple = builtins.filter (
-    i: builtins.any (j: builtins.any (k: i + j + k == 2020) numbers) numbers
-  ) numbers;
+let
+  input = filter (x: x != [ ]) (split "\n" (readFile ./input));
+  numbers = map fromJSON input;
+
+  triple = filter (i: any (j: any (k: i + j + k == 2020) numbers) numbers) numbers;
 in
-builtins.foldl' (i: j: i * j) 1 triple
+foldl' (i: j: i * j) 1 triple
